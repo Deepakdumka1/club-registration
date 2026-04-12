@@ -59,7 +59,7 @@ export default function ClubDetailsPage({ params }: { params: Promise<{ id: stri
       const q = query(collection(db, "applications"), where("userId", "==", user.uid), where("clubId", "==", clubId));
       unsubApp = onSnapshot(q, (snap) => {
         if (!snap.empty) {
-          const apps = snap.docs.map(d => ({id: d.id, ...d.data()}));
+          const apps = snap.docs.map(d => ({id: d.id, ...d.data()})) as any[];
           // Sort by date locally
           apps.sort((a: any, b: any) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
           const latest = apps[0];

@@ -16,7 +16,7 @@ export default function AdminApplications() {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "applications"), (snapshot) => {
-      const apps = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const apps = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as any[];
       apps.sort((a: any, b: any) => b.createdAt?.seconds - a.createdAt?.seconds);
       setApplications(apps);
       setLoading(false);

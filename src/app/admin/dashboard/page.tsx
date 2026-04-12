@@ -61,7 +61,7 @@ export default function AdminDashboard() {
     // Listen to live pending applications
     const q = query(collection(db, "applications"), where("status", "==", "pending"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const apps = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const apps = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as any[];
       setRequests(apps);
       setStats(prev => ({ ...prev, pendingRequests: apps.length }));
       setLoading(false);
